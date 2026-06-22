@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Pengantar Kecerdasan Buatan",
+    "path": "/materi/ai/materi1",
+    "course": "Ai",
+    "excerpt": "Pengantar Kecerdasan Buatan Kecerdasan Buatan (Artificial Intelligence / AI) adalah cabang ilmu komputer yang berfokus pada pembuatan sistem yang dapa..."
+  },
+  {
+    "title": "Module 9 - Address Resolution",
+    "path": "/materi/jaringan-komputer/materi1",
+    "course": "Jaringan Komputer",
+    "excerpt": "Address Resolution Protocol (ARP) Address Resolution Protocol (ARP) digunakan untuk memetakan alamat IP (Layer 3) ke alamat MAC (Layer 2) dalam jaring..."
+  },
+  {
+    "title": "Module 10 - Transport Layer",
+    "path": "/materi/jaringan-komputer/materi2",
+    "course": "Jaringan Komputer",
+    "excerpt": "Transport Layer Transport layer bertanggung jawab untuk menyediakan komunikasi endtoend antara proses pada host yang berbeda. Dua protokol utama pada ..."
+  }
+]

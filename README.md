@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📚 Materi Kuliah
 
-## Getting Started
+Website dokumentasi materi kuliah — dibangun dengan **Next.js 15**, **TypeScript**, dan **Tailwind CSS**.
 
-First, run the development server:
+Semua konten berupa file Markdown yang disimpan di repo. Cukup tambahkan file `.md` baru, commit, dan deploy — route otomatis terbuat.
+
+## 🚀 Quick Start
 
 ```bash
+# Install dependencies
+npm install
+
+# Generate search index (opsional untuk dev)
+npm run generate-search
+
+# Jalankan development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📝 Cara Menambah Materi Baru
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Tambah materi ke course yang sudah ada
 
-## Learn More
+Buat file `.md` baru di folder course yang sesuai:
 
-To learn more about Next.js, take a look at the following resources:
+```
+materi/
+  jaringan-komputer/
+    materi-baru.md    ← tambahkan di sini
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Tambah mata kuliah baru
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Buat folder baru di dalam `materi/`:
 
-## Deploy on Vercel
+```
+materi/
+  sistem-operasi/     ← folder baru
+    materi1.md
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 3. Format frontmatter
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Setiap file markdown **harus** memiliki frontmatter YAML di bagian atas:
+
+```yaml
+---
+title: "Judul Materi"
+description: "Deskripsi singkat materi"
+order: 1
+date: 2026-06-22
+---
+
+# Konten Markdown
+
+Tulis konten di sini...
+```
+
+| Field | Wajib | Keterangan |
+|-------|-------|------------|
+| `title` | ✅ | Judul yang ditampilkan di navigasi dan halaman |
+| `description` | ❌ | Deskripsi singkat, tampil di daftar materi |
+| `order` | ❌ | Urutan tampil (ascending). Default: 999 |
+| `date` | ❌ | Tanggal materi (format: YYYY-MM-DD) |
+
+### 4. Deploy
+
+Setelah commit & push, materi baru otomatis tersedia di route:
+
+```
+domain.com/materi/[nama-folder]/[nama-file-tanpa-.md]
+```
+
+Contoh: `materi/jaringan-komputer/materi1.md` → `domain.com/materi/jaringan-komputer/materi1`
+
+## 🏗️ Struktur Project
+
+```
+/materi                          ← Konten markdown
+  /jaringan-komputer
+    materi1.md
+    materi2.md
+  /ai
+    materi1.md
+
+/src
+  /app
+    page.tsx                     ← Homepage
+    /materi
+      page.tsx                   ← Daftar semua mata kuliah
+      /[...slug]
+        page.tsx                 ← Render materi / daftar materi per course
+  /components
+    Navbar.tsx                   ← Navigasi atas + search
+    Sidebar.tsx                  ← Sidebar navigasi materi
+    Breadcrumb.tsx               ← Breadcrumb navigasi
+    SearchBar.tsx                ← Pencarian client-side (Fuse.js)
+    CourseCard.tsx                ← Card mata kuliah
+    MateriCard.tsx               ← Card materi
+    MarkdownRenderer.tsx         ← Render markdown → HTML
+    ThemeProvider.tsx             ← Dark mode provider
+    MateriDetailView.tsx         ← Wrapper halaman detail materi
+  /lib
+    markdown.ts                  ← Helper baca & parse file markdown
+    types.ts                     ← TypeScript interfaces
+    utils.ts                     ← Utility functions
+
+/scripts
+  generate-search-index.ts       ← Generate search index saat build
+```
+
+## 🛠️ Tech Stack
+
+- **Next.js 15** — App Router, Static Site Generation
+- **TypeScript** — Type safety
+- **Tailwind CSS v4** — Styling + Typography plugin
+- **react-markdown** — Render markdown
+- **remark-gfm** — GitHub Flavored Markdown (tabel, dll)
+- **rehype-highlight** — Syntax highlighting code block
+- **gray-matter** — Parse frontmatter YAML
+- **Fuse.js** — Fuzzy search client-side
+- **Lucide React** — Icons
+
+## 📦 Build & Deploy
+
+```bash
+# Build production
+npm run build
+
+# Jalankan production server
+npm start
+```
+
+Deploy ke **Vercel** dengan push ke repository — otomatis build & deploy.
