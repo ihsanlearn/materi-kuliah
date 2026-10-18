@@ -36,8 +36,7 @@ function slugifyHeading(children: React.ReactNode): string {
     .normalize("NFKD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^\p{L}\p{N}\s-]/gu, "")
-    .replace(/[\s]+/g, "-")
-    .replace(/-+/g, "-")
+    .replace(/\s/g, "-")
     .replace(/^-|-$/g, "");
 }
 
