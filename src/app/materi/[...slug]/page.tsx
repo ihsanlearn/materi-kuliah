@@ -11,6 +11,7 @@ import {
 import MateriCard from "@/components/MateriCard";
 import Breadcrumb from "@/components/Breadcrumb";
 import MateriDetailView from "@/components/MateriDetailView";
+import { extractHeadings } from "@/lib/headings";
 
 interface PageProps {
   params: Promise<{ slug: string[] }>;
@@ -111,6 +112,7 @@ export default async function MateriPage({ params }: PageProps) {
   if (!materi) notFound();
 
   const materiList = getMateriList(course);
+  const headings = extractHeadings(materi.content);
 
   return (
     <MateriDetailView
@@ -120,6 +122,7 @@ export default async function MateriPage({ params }: PageProps) {
       date={materi.meta.date}
       content={materi.content}
       materiList={materiList}
+      headings={headings}
     />
   );
 }
