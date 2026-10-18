@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FileText, ChevronDown, ChevronRight, X } from "lucide-react";
@@ -111,7 +112,7 @@ export default function Sidebar({ course, materiList, headings, isOpen, onClose 
     }
   }, [activeHeading, expandAncestors]);
 
-  const renderHeading = (node: HeadingNode): React.ReactNode => {
+  const renderHeading = (node: HeadingNode): ReactNode => {
     const isExpanded = expanded.has(node.id);
     const isActive = activeHeading === node.id;
     const hasChildren = node.children.length > 0;
