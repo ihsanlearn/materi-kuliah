@@ -50,14 +50,6 @@ export default function MateriDetail({
 
       <div className="min-w-0 flex-1">
         <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="mb-4 inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 shadow-sm transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 lg:hidden"
-          >
-            <PanelLeftOpen className="h-4 w-4" />
-            Navigasi
-          </button>
-
           <div className="mb-4 sm:mb-6">
             <Breadcrumb
               items={[
@@ -87,6 +79,16 @@ export default function MateriDetail({
           <MarkdownRenderer content={content} />
         </div>
       </div>
+
+      <button
+        type="button"
+        onClick={() => setSidebarOpen(true)}
+        aria-label="Buka navigasi materi"
+        className="fixed right-4 bottom-[calc(env(safe-area-inset-bottom)+1rem)] z-30 inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-900/20 transition hover:bg-sky-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 active:scale-95 lg:hidden"
+      >
+        <PanelLeftOpen className="h-4 w-4" />
+        Navigasi
+      </button>
     </div>
   );
 }
